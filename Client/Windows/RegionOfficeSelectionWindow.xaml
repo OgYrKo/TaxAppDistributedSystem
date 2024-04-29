@@ -1,0 +1,50 @@
+﻿<Window x:Class="Client.Windows.RegionOfficeSelectionWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Public Accounting" 
+        Icon="..\Images\Logo.ico" 
+        TextBlock.TextAlignment="Center" 
+        HorizontalAlignment="Center"
+        Height="720" 
+        Width="1216" 
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <!--Label style-->
+        <Style TargetType="Label" x:Key="LabelStyle">
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="#F1F0EB">
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+            <StackPanel>
+                <Image Source="..\Images\PA_Login.png" Height="150" Margin="0,68,0,0"/>
+                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Height="200" Width="250" Margin="75" Background="#D5CEC1" Click="AdminButtonClick">
+                        <StackPanel>
+                            <Image Source="..\Images\Admin.png" Height="100"></Image>
+                            <Label Content="Адмін Центр" Style="{StaticResource LabelStyle}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="200" Width="250" Margin="75" Background="#D5CEC1" Click="ManagerButtonClick">
+                        <StackPanel>
+                            <Image Source="..\Images\Manager.png" Height="100"></Image>
+                            <Label Content="Менедж Центр" Style="{StaticResource LabelStyle}"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+            </StackPanel>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net472</TargetFrameworks>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
+		<TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<TargetFrameworkIdentifier>.netcoreapp5.0</TargetFrameworkIdentifier>
+	</PropertyGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreWCF.NetTcp" Version="1.3.2" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="EntityFrameworkCore.Exceptions.Common" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankServiceInterfaces\BankServiceInterfaces.csproj" />
+    <ProjectReference Include="..\DBClassesLibrary\DBClassesLibrary.csproj" />
+    <ProjectReference Include="..\InterfacesLibrary\InterfacesLibrary.csproj" />
+    <ProjectReference Include="..\RouterInterfaces\RouterInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>

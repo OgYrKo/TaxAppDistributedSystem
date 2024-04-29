@@ -1,0 +1,222 @@
+﻿<Page x:Class="Client.Pages.Cards.LandCard"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:Client.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="2050" d:DesignWidth="800"
+      Title="LandCard">
+    <Page.Resources>
+        <Style TargetType="ComboBox" x:Key="WrapperComboBox">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="DockPanel.Dock" Value="Right"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="MaxHeight" Value="200"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="WrapPanel" x:Key="WrappPanelTemplate">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <uc:SubMenu x:Name="subMenu" Header="Земельна ділянка" Grid.Row="0">
+            <uc:SubMenu.ItemsSource>
+                <x:Array Type="{x:Type uc:SubMenuItem}">
+                    <uc:SubMenuItem Kind="Edit" Text="Редагувати" MouseUp="SaveAndEditClick"/>
+                    <uc:SubMenuItem Kind="Delete" Text="Видалити" MouseUp="Delete"/>
+                    <uc:SubMenuItem Kind="HumanEdit" Text="Змінити власника" MouseUp="ChangeOwners"/>
+                    <uc:SubMenuItem Kind="Money" Text="Нарахувати податок" MouseUp="ChargeTax"/>
+                </x:Array>
+            </uc:SubMenu.ItemsSource>
+        </uc:SubMenu>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1">
+            <StackPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:Field x:Name="Key" Header="Код"/>
+                    <uc:Field x:Name="LandName" Header="Найменування*" IsEnabled="{Binding Path=IsEditable}"/>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:Field x:Name="CadastrialNumber" 
+                              Header="Кадастровий номер*"  
+                              PreviewTxtInput="CadastrialNumber_PreviewTextInput" 
+                              IsEnabled="{Binding Path=IsEditable}"
+                              Tip="Має вид:    0000000000:00:000:0000"/>
+                    <uc:ComboField x:Name="OwnershipType" Header="Форма власності*" IsEnabled="{Binding Path=IsEditable}"/>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:Field x:Name="Square" Header="Площа*" IsEnabled="{Binding Path=IsEditable}" PreviewTextInput="Decimal_PreviewTextInput"/>
+                    <uc:Field x:Name="Area" Header="Зона*" IsEnabled="{Binding Path=IsEditable}" PreviewTextInput="Number_PreviewTextInput" Tip="Приймає значення від 1 до 13"/>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:Field x:Name="StandartValuation" Header="НГО (грн.)*" PreviewTextInput="Decimal_PreviewTextInput" IsEnabled="{Binding Path=IsEditable}"/>
+                    <uc:Field x:Name="MonetaryValuation" Header="РГО (грн.)*" PreviewTextInput="Decimal_PreviewTextInput" IsEnabled="{Binding Path=IsEditable}"/>
+                </WrapPanel>
+                <Expander Style="{StaticResource ExpanderMenu}" Header="Адреса" >
+                    <WrapPanel  Style="{StaticResource CardWrappPanelTemplate}">
+                        <uc:ComboField x:Name="City" Header="Місто*" IsEnabled="{Binding Path=IsEditable}" SelectionChanged="City_SelectionChanged"/>
+                        <uc:ComboField x:Name="Street" Header="Вулиця*" IsEnabled="{Binding Path=IsEditable}"/>
+                        <uc:Field x:Name="HouseNum" Header="Будинок*" IsEnabled="{Binding Path=IsEditable}"/>
+                        <uc:ComboField x:Name="Location" Header="Розташування" IsEnabled="{Binding Path=IsEditable}"/>
+                    </WrapPanel>
+                </Expander>
+                <Expander Style="{StaticResource ExpanderMenu}" Header="Власник">
+                    <StackPanel>
+                        <WrapPanel  Style="{StaticResource CardWrappPanelTemplate}">
+                            <uc:Field x:Name="Owners" Header="Власник"/>
+                        </WrapPanel>
+                        <DataGrid x:Name="OwnersData" 
+                                              AlternatingRowBackground="White"
+                                              CanUserAddRows="False" 
+                                              CanUserResizeColumns="True"
+                                              AutoGenerateColumns="False"
+                                              ColumnWidth="*"
+                                              Margin="20"
+                                              IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Код власника"
+                                            Binding="{Binding Path=Counterpartykey}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment"
+                                            Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Власник"  
+                                            Binding="{Binding Path=Counterpartyname}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment"
+                                            Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Частина" 
+                                            Binding="{Binding Path=Share}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment"
+                                            Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата" 
+                                            Binding="{Binding Path=Contractorslanddate}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment"
+                                            Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Expander>
+                <Expander Style="{StaticResource ExpanderMenu}" Header="Цільове призначення">
+                    <StackPanel>
+                        <WrapPanel Style="{StaticResource WrappPanelTemplate}">
+                            <DockPanel Style="{StaticResource WrapperDockPanel}" >
+                                <Label Style="{StaticResource LeftWrapperLabel}">Секція*</Label>
+                                <ComboBox x:Name="Section" Style="{StaticResource WrapperComboBox}" IsEnabled="{Binding Path=IsEditable}" SelectionChanged="Section_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0}: {1}">
+                                                        <Binding Path="Sectionkey"/>
+                                                        <Binding Path="Section"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Style="{StaticResource RightWrapperLabel}"></Label>
+
+                            </DockPanel>
+                            <DockPanel Style="{StaticResource WrapperDockPanel}" >
+                                <Label Style="{StaticResource LeftWrapperLabel}">Розділ*</Label>
+                                <ComboBox x:Name="Chapter" Style="{StaticResource WrapperComboBox}" IsEnabled="{Binding Path=IsEditable}" SelectionChanged="Chapter_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0}.{1}: {2}">
+                                                        <Binding Path="Sectionkey"/>
+                                                        <Binding Path="Chapterkey"/>
+                                                        <Binding Path="Chapter"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Style="{StaticResource RightWrapperLabel}"></Label>
+                            </DockPanel>
+                            <DockPanel Style="{StaticResource WrapperDockPanel}" >
+                                <Label Style="{StaticResource LeftWrapperLabel}">Підрозділ*</Label>
+                                <ComboBox x:Name="SubGroup" 
+                                          Style="{StaticResource WrapperComboBox}" 
+                                          IsEnabled="{Binding Path=IsEditable}" 
+                                          SelectionChanged="SubGroup_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0}.{1}: {2}">
+                                                        <Binding Path="Chapterkey"/>
+                                                        <Binding Path="Groupkey"/>
+                                                        <Binding Path="Subgrouptext"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Style="{StaticResource RightWrapperLabel}"></Label>
+                            </DockPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                </Expander>
+                <StackPanel Margin="0 20" HorizontalAlignment="Center">
+                    <Label Style="{StaticResource LeftWrapperLabel}">Пояснення</Label>
+                    <TextBox x:Name="ExternalComment"
+                             IsEnabled="{Binding Path=IsEditable}"
+                                         Height="100" 
+                                         Width="500"
+                                         HorizontalAlignment="Center"
+                                         TextAlignment="Left"
+                                         Margin="0 10" 
+                                         Background="White" 
+                                         TextWrapping="Wrap"
+                                         AcceptsReturn="True"
+                                         MaxLength="256"/>
+                </StackPanel>
+                <!--Expanders-->
+                <!--<WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:PasswordField x:Name="Password" IsEnabled="{Binding Path=IsEditable}"/>
+                    <uc:ComboField x:Name="Group" Header="Група*" IsEnabled="{Binding Path=IsEditable}"/>
+                </WrapPanel>-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

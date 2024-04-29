@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="ClientControlsLibrary.Field"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientControlsLibrary"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Label" x:Key="LeftWrapperLabel">
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5 5 0 5"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="RightWrapperLabel">
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Opacity" Value="0.3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5 5 0 5"/>
+            <Setter Property="Content" Value="• • • • • • • • • • • • • • • • • • • • • • "/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="WrapperTextBox">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="DockPanel.Dock" Value="Right"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="MaxHeight" Value="200"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+        </Style>
+
+        <Style TargetType="DockPanel" x:Key="WrapperDockPanel">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="50 20"/>
+            <Setter Property="Width" Value="600"/>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel Style="{StaticResource WrapperDockPanel}" >
+        <Label Style="{StaticResource LeftWrapperLabel}"
+                   Content="{Binding Header, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        <StackPanel DockPanel.Dock="Right">
+            <TextBox Style="{StaticResource WrapperTextBox}"
+                     Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                     IsEnabled="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <Label Content="{Binding Tip, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </StackPanel>
+        
+        <Label Style="{StaticResource RightWrapperLabel}"></Label>
+    </DockPanel>
+    
+</UserControl>

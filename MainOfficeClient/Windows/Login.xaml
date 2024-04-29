@@ -1,0 +1,48 @@
+﻿<Window x:Class="MainOfficeClient.Windows.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Public Accounting" 
+        Icon="..\Images\Logo.ico" 
+        TextBlock.TextAlignment="Center" 
+        HorizontalAlignment="Center"
+        Height="720" 
+        Width="1216" 
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" KeyDown="Window_KeyDown">
+    <Grid Background="#F1F0EB">
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+            <StackPanel>
+                <Image Source="..\Images/PA_Login.png" Height="150" Margin="0,68,0,0"/>
+                <TextBox Margin="0 50 0 0" x:Name="txtUsername" Width="300" Height="58" FontSize="14"
+                     materialDesign:HintAssist.Hint="Логін" BorderThickness="2"
+                     BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                <PasswordBox Margin="0 20 0 10" x:Name="txtPassword" Width="300" Height="58" FontSize="14"
+                     materialDesign:HintAssist.Hint="Пароль" BorderThickness="2"
+                     BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"/>
+                <Button Click="buttonConfirm_Click"
+                        Margin="0 10 0 0" x:Name="buttonConfirm" 
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        materialDesign:ElevationAssist.Elevation="Dp0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Width="300" Height="58" Background="#BC8F43" FontSize="14" Foreground="White">Увійти</Button>
+                <ProgressBar x:Name="progressBar" 
+                             Visibility="Collapsed"
+                             IsIndeterminate="True" 
+                             Width="280"/>
+                <Label x:Name="errorMessage" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
+
+                <Button Margin="0 10 0 0" x:Name="buttonTip" 
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                         materialDesign:ElevationAssist.Elevation="Dp0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Width="300" Height="58" FontSize="14">Забули пароль?</Button>
+
+            </StackPanel>
+        </materialDesign:DialogHost>
+        <TextBox Name="position" Visibility="Collapsed"/>
+    </Grid>
+</Window>

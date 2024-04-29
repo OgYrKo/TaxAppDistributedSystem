@@ -1,0 +1,35 @@
+﻿<Window x:Class="MainOfficeClient.Windows.Dialogs.CheckDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainOfficeClient.Windows.Dialogs"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterOwner" 
+        WindowState="Maximized"
+        Background="#33000000">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="DialogTextBlock">
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="#896215"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5 5 0 5"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#F1F0EB" VerticalAlignment="Center" HorizontalAlignment="Center" Width="560" Height="240">
+        <StackPanel Margin="50" >
+            <TextBlock  x:Name="Question" Style="{StaticResource DialogTextBlock}">Виконати дію?</TextBlock>
+            <WrapPanel HorizontalAlignment="Center" Margin="20">
+                <Button Background="#BC8F43" Width="120" Margin="20" Click="Button_Click_1">Скасувати</Button>
+                <Button Background="#BC8F43" Width="120" Margin="20" Click="Button_Click">Підтвердити</Button>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Window>

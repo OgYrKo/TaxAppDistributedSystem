@@ -1,0 +1,38 @@
+﻿<Page x:Class="Client.Pages.Menus.RegionOfficeManager"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:Client.Controls"
+      xmlns:local="clr-namespace:Client.Pages.Menus"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="RegionOfficeManager">
+
+    <Grid Height="550">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="44*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" >
+            <uc:MenuButton Text="Контрагенти" Source="..\Images\Counterparty.ico" Click="OpenCounterpartyList"/>
+        </Grid>
+        <Grid Grid.Column="1" >
+            <uc:MenuButton Text="Земельні ділянки" Source="..\Images\Land.ico" Click="OpenLandList"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1" >
+            <uc:MenuButton Text="Об'єкти нерухомості" Source="..\Images\Property.ico" Click="OpenPropertyList"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" >
+            <uc:MenuButton Text="Фінансові операції" Source="..\Images\Operations.ico" Click="OpenTaskList"/>
+        </Grid>
+        <uc:BankOrders Grid.Column="2" Grid.RowSpan="2"/>
+
+    </Grid>
+</Page>

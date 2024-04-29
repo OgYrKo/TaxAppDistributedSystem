@@ -1,0 +1,39 @@
+﻿<Page x:Class="Client.Pages.Cards.UserCard"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:Client.Controls"
+      xmlns:local="clr-namespace:Client.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="476.469" d:DesignWidth="800"
+      Title="UserCard">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <uc:SubMenu x:Name="subMenu" Header="Користувач" Grid.Row="0">
+                <uc:SubMenu.ItemsSource>
+                    <x:Array Type="{x:Type uc:SubMenuItem}">
+                        <uc:SubMenuItem Kind="Edit" Text="Редагувати" MouseUp="SaveAndEditClick"/>
+                        <uc:SubMenuItem Kind="Delete" Text="Видалити" MouseUp="Delete"/>
+                    </x:Array>
+                </uc:SubMenu.ItemsSource>
+            </uc:SubMenu>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1">
+            <StackPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:Field x:Name="Key" Header="Код"/>
+                    <uc:Field x:Name="Login" Header="Логін*" IsEnabled="{Binding Path=IsEditable}" Text=""/>
+                </WrapPanel>
+                <WrapPanel Style="{StaticResource CardWrappPanelTemplate}">
+                    <uc:PasswordField x:Name="Password" IsEnabled="{Binding Path=IsEditable}"/>
+                    <uc:ComboField x:Name="Group" Header="Група*" IsEnabled="{Binding Path=IsEditable}"/>
+                </WrapPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+

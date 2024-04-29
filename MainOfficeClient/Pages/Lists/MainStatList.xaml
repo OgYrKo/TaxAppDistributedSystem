@@ -1,0 +1,109 @@
+﻿<Page x:Class="MainOfficeClient.Pages.Lists.MainStatList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:uc="clr-namespace:ClientControlsLibrary;assembly=ClientControlsLibrary"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Inter"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <uc:SubMenu x:Name="officeMenu"
+                    Header="Статистика"
+                    SelectionImportant="True"
+                    OnSelctionChanged="officeMenu_OnSelctionChanged"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <uc:ListContent  x:Name="chartMenu" OnSelctionChanged="ChartMenuSelectionChanged">
+                    <uc:ListContent.ItemsSource>
+                        <x:Array Type="{x:Type uc:ListItem}">
+                            <uc:ListItem Text="Сплата 1"></uc:ListItem>
+                            <uc:ListItem Text="Сплата 2"></uc:ListItem>
+                            <uc:ListItem Text="Сплата 3"></uc:ListItem>
+                            <uc:ListItem Text="Сплата 4"></uc:ListItem>
+                            <uc:ListItem Text="Сплата 5"></uc:ListItem>
+                        </x:Array>
+                    </uc:ListContent.ItemsSource>
+                </uc:ListContent>
+            </Grid>
+            <GridSplitter Grid.Column="0" Width="5"/>
+                
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <ListView x:Name="yearsMenu"
+                              HorizontalAlignment="Center"
+                              SelectionChanged="yearsMenu_SelectionChanged">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="20">
+                    <lvc:CartesianChart x:Name="cartesianChart"
+                                    Grid.Row="1"
+                                    Visibility="Visible">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Дні"/>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Сумма" />
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+
+                    <lvc:PieChart Name="pieChart"
+								  LegendLocation="Bottom"
+								  DataTooltip="{x:Null}"
+                                  Grid.Row="1"
+                                  Visibility="Collapsed">
+                        <lvc:PieChart.Series>
+                            <lvc:PieSeries Name="RestSeries"  Title="Не сплачено" FontSize="16" LabelPoint="{Binding PointLabel}" DataLabels="True" Fill="#28465A" />
+                            <lvc:PieSeries Name="ActualSeries"  Title="Сплачено" FontSize="16" LabelPoint="{Binding PointLabel}" DataLabels="True" Foreground="#28465A" Fill="#FFE3D9BE"/>
+                        </lvc:PieChart.Series>
+                    </lvc:PieChart>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="5"/>
+            <Grid Grid.Column="2">
+                <ListView x:Name="quarterMenu"
+                              VerticalAlignment="Center"
+                              SelectionChanged="quarterMenu_SelectionChanged">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+
